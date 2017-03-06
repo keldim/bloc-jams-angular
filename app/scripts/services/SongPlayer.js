@@ -1,6 +1,13 @@
 (function() {
      function SongPlayer() {
           var SongPlayer = {};
+          
+         /**
+ * @desc one of the song objects in songs array
+ * @type {Object}
+ */
+         
+         
           var currentSong = null;
           
          /**
@@ -32,12 +39,26 @@
           };
          
          
+         
+         /**
+ * @function playSong
+ * @desc Plays the clicked song and allows the pause button to appear
+ * @param {Object} song
+ */
+         
+         
+         
+          var playSong = function(song) {
+            currentBuzzObject.play();
+            song.playing = true;  
+          };
+         
+         
           SongPlayer.play = function(song) {
               
             if (currentSong !== song) {
                 setSong(song);
-                currentBuzzObject.play();
-                song.playing = true;
+                playSong(song);
             } else if (currentSong === song) {
                 if (currentBuzzObject.isPaused()) {
                     currentBuzzObject.play();
