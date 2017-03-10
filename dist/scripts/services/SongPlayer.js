@@ -1,5 +1,5 @@
 (function() {
-      function SongPlayer(Fixtures) {
+      function SongPlayer($rootScope, Fixtures) {
           var SongPlayer = {};
           
           
@@ -53,6 +53,11 @@
             currentBuzzObject.play();
             song.playing = true;  
           };
+          
+          var stopSong = function(song) {
+              currentBuzzObject.stop();
+              song.playing = null;
+          }
          
    
           
@@ -91,8 +96,7 @@
          
           SongPlayer.pause = function(song) {
               song = song || SongPlayer.currentSong;
-            currentBuzzObject.pause();
-            song.playing = false;
+           stopSong(song);
           };
          
               
@@ -111,6 +115,20 @@
             }
           };
           
+
+          SongPlayer.next = function() {
+            var currentSongIndex = getSongIndex(SongPlayer.currentSong);
+            currentSongIndex++;
+              
+            if (currentSongIndex >= currentAlbum.songs.length) {
+                currentBuzzObject.stop();
+                SongPlayer.currentSong.playing = null;
+            } else {
+                var song = currentAlbum.songs[currentSongIndex];
+                setSong(song);
+                playSong(song);
+            }
+          };
           
               
           return SongPlayer;

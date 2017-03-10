@@ -1,5 +1,5 @@
 (function() {
-      function SongPlayer(Fixtures) {
+      function SongPlayer($rootScope, Fixtures) {
           var SongPlayer = {};
           
           
@@ -115,7 +115,7 @@
             }
           };
           
-          
+
           SongPlayer.next = function() {
             var currentSongIndex = getSongIndex(SongPlayer.currentSong);
             currentSongIndex++;
